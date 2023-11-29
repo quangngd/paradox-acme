@@ -43,6 +43,6 @@ defmodule AcmeWeb.ProductController do
 
   def total_inventory_cost(conn, %{"id" => id}) do
     product = Products.get_product!(id)
-    render(conn, "show.json", product: product)
+    render(conn, "show_with_total_inventory_cost.json", product: product)
   end
 end
