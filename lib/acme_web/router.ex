@@ -24,6 +24,9 @@ defmodule AcmeWeb.Router do
     pipe_through :api
 
     resources "/products", ProductController, except: [:new, :edit]
+    scope "/products" do
+      get "/:id/total_inventory_cost", ProductController, :total_inventory_cost
+    end
   end
 
   # Enables LiveDashboard only for development

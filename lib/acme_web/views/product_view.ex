@@ -17,7 +17,8 @@ defmodule AcmeWeb.ProductView do
       description: product.description,
       category: product.category,
       quantity: product.quantity,
-      unit_cost: product.unit_cost
+      unit_cost: product.unit_cost,
+      total_inventory_cost: product.unit_cost * product.quantity
     }
   end
 end

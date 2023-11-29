@@ -40,4 +40,9 @@ defmodule AcmeWeb.ProductController do
       send_resp(conn, :no_content, "")
     end
   end
+
+  def total_inventory_cost(conn, %{"id" => id}) do
+    product = Products.get_product!(id)
+    render(conn, "show.json", product: product)
+  end
 end
