@@ -15,7 +15,15 @@ defmodule AcmeWeb.ProductView do
   end
 
   def render("product.json", %{product: product}) do
-    %{
+    make_map_from_product(product, false)
+  end
+
+  def render("total_inventory_cost.json", %{product: product}) do
+    make_map_from_product(product, true)
+  end
+
+  defp make_map_from_product(product, show_total_inventory_cost) do
+    map = %{
       id: product.id,
       name: product.name,
       description: product.description,
@@ -23,17 +31,11 @@ defmodule AcmeWeb.ProductView do
       quantity: product.quantity,
       unit_cost: product.unit_cost
     }
-  end
 
-  def render("total_inventory_cost.json", %{product: product}) do
-    %{
-      id: product.id,
-      name: product.name,
-      description: product.description,
-      category: product.category,
-      quantity: product.quantity,
-      unit_cost: product.unit_cost,
-      total_inventory_cost: product.unit_cost * product.quantity
-    }
+    if show_total_inventory_cost do
+      Map.put(map, :total_inventory_cost, product.unit_cost * product.quantity)
+    else
+      map
+    end
   end
 end
